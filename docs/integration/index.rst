@@ -7,7 +7,6 @@ Chekcout.com Payment
 
    odoo
    checkout
-   installation
    configuration
 
 
