@@ -1,1 +1,1 @@
-# odoo-payment_checkout
+# odoo-payment-checkout
