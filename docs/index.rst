@@ -2,8 +2,8 @@ Odoo checkout payment
 =====================
 
 * Payment Acquirer: Checkout.com Implementation
-* Checkout.com Payment Gateway is available in ODOO to making a payment processing easier
 * Installation & Configuration
+* Demo
 
 Current content:
 
@@ -11,7 +11,6 @@ Current content:
    :maxdepth: 2
 
    integration/index
-
 
 
 .. admonition:: Need More documentation?

@@ -18,13 +18,19 @@ Setting Up a Test Merchant Account
 
 * Go to settings (gear icon of the top right corner), from there you should go to channel settings.
 
+* You should find the keys at this point.
+
 .. image:: ../images/sandbox_key.PNG
 
-* You should find the keys at this point.
+
 
 
 Checkout.js
 ============
+
+
+Create Card Token
+=====================
 
 The Checkout.js solution will allow to create a card token, and then charge the customer from the server using the generated card token. 
 
@@ -63,6 +69,35 @@ Code::
 
 And here's a link to the https://docs.checkout.com/reference/checkout-js-reference/configuration-options reference if you wish to customise it further.
 
-Use the card token obtained in the cardTokenised event to make a charge with card token from the server.
+Charge with Card Token
+======================
+ 
+We Use the card token obtained in the cardTokenised event to make a charge with card token from the odoo server.
 
+* Create checkout charge
 
+Code::
+
+		headers = {'content-type': 'application/json',
+		   'Authorization': 'sk_test_55aedccc-7f53-4ccc-b0a6-d943decc3c31'}
+		   
+		post_url = 'https://sandbox.checkout.com/api2/v2/charges/token'
+		
+		charge_params = {
+		  "autoCapTime": "0",
+		  "autoCapture": "Y",
+		  "chargeMode": 1,
+		  "email": "testuser@email.com",
+		  "customerName": "Test User",
+		  "description": "charge description",
+		  "value": "4298",
+		  "currency": "GBP",
+		  "trackId": "TRK12345",
+		  "cardToken": "card_tok_CB9C10E3-24CC-4A82-B50A-4DEFDCB15580"
+		}
+
+		response = requests.post(post_url, data=json.dumps(charge_params), headers=headers)
+		
+The Card Token received in the cardTokenised event, should be passed to odoo server and do the POST request from odoo server.
+
+Once the Charge with Card Token request has been sent, Checkout.com will return the charge response to the merchant backend server.
